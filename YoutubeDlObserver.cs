@@ -4,11 +4,15 @@ using System.Threading;
 
 class YoutubeDlObserver {
 	static void processStartedEvent(object sender, EventArrivedEventArgs e) {
-		ManagementBaseObject proc = (ManagementBaseObject) ((ManagementBaseObject) e.NewEvent) ["TargetInstance"];
+		ManagementBaseObject proc = (ManagementBaseObject) (
+			(ManagementBaseObject) e.NewEvent
+		) ["TargetInstance"];
 
 		if ((string) proc["Name"] != "youtube-dl.exe") return;
 
-		Console.WriteLine(proc["CommandLine"]);
+		Console.WriteLine(
+			DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss ") + proc["CommandLine"]
+		);
 	}
 
 	static void Main(string[] args) {
